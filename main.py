@@ -15,11 +15,11 @@ def get_db_connection():
     return connection
 
 # Rota para obter todos os cargos
-@app.route('/cargos', methods=['GET'])
+@app.route('/get_medicamentos', methods=['GET'])
 def get_cargos():
     connection = get_db_connection()
     cursor = connection.cursor()
-    cursor.execute("select c.descricao as Categoria, mt.descricao as Motivo, nome, codigo, quantidade_minima, localizacao from medicamentos m join categorias c on m.id_categoria = c.id_categoria join motivos mt on m.id_motivo = mt.id_motivo")
+    cursor.execute("select c.descricao as Categoria, mt.descricao as Motivo, nome, codigo, quantidade_minima, localizacao from rm93069.medicamentos m join rm93069.categorias c on m.id_categoria = c.id_categoria join rm93069.motivos mt on m.id_motivo = mt.id_motivo")
     rows = cursor.fetchall()  # Obtemos todas as linhas da tabela
 
     cargos = []
