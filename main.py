@@ -19,16 +19,18 @@ def get_db_connection():
 def get_cargos():
     connection = get_db_connection()
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM cargos")
+    cursor.execute("select c.descricao as Categoria, mt.descricao as Motivo, nome, codigo, quantidade_minima, localizacao from medicamentos m join categorias c on m.id_categoria = c.id_categoria join motivos mt on m.id_motivo = mt.id_motivo")
     rows = cursor.fetchall()  # Obtemos todas as linhas da tabela
 
-    # Transformar os resultados em um formato de lista de dicionários
     cargos = []
     for row in rows:
         cargo = {
-            "id": row[0],  # Substitua pelos nomes reais das colunas
-            "nome": row[1],  # Substitua pelos nomes reais das colunas
-            # Adicione outros campos conforme necessário
+            "Categoria": row[0],
+            "Motivo": row[1],
+            "Nome": row[2],
+            "Código": row[3],
+            "Quantidade Minima": row[4],
+            "Localização": row[5],
         }
         cargos.append(cargo)
 
